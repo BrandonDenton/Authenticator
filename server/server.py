@@ -58,11 +58,7 @@ def servRun():
             servlogs.write(strftime("%Y-%m-%d_%H-%M-%S", gmtime()) + "    grabbing usage data from " + clientaddr)
             flag, i = "1", 0
             flag = sendconn.recv()   # If this flag is ever set to zero, the client is done sending files. 
-            key = sendconn.recv()    # get the AES key for the session
-            keyfile = open("aeskey", "wb")
-            keyfile.write(key)    # record the key for later use
-            keyfile.close()
-        
+            
             ## Now record the encrypted file the client user has sent. ##
             while(flag == "1"):
                 fileContents = sencconn.recv()
