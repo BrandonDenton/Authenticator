@@ -1,17 +1,14 @@
 #!usr/bin/env python
 ########################################################################
-# Stripped-down Snapchat Clone Server
+# JSON-Receiving and Parsing TCP Server
 # AUTHOR: Brandon Denton
 #
-# This script is intended to connect to a companion client application
-# "picSwap.py" via a socket it creates to the server machine and send a
-# file intended for that client through that socket. Right now, the 
-# user has to define the file sent from the server by user input, but 
-# eventually I'll have "server.py" search a directory on the host 
-# machine made especially for the user currently connecting to it and 
-# send that client files stored there.
+# This script is intended to connect via TCP sockets to an Android 
+# application which collects anonymiezed data about the usage of the 
+# device on which it is running, read JSON objects sent along that 
+# socket, and parse them appropriately for use by the MALLET topic
+# modelling package
 ########################################################################
-#import logging as logs
 import socket as S
 import os    # We need to make a directory to store user keys and files to be sent.
 from time import gmtime, strftime   # timestamping phone data files
