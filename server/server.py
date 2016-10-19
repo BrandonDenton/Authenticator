@@ -12,22 +12,25 @@
 import socket as S
 import os    # We need to make a directory to store user keys and files to be sent.
 from time import gmtime, strftime   # timestamping phone data files
-import MySQLdb
-
+import pymysql.cursors
 
 
 ## My scheme for the server requires it to listen for requests on three ports, ##
 ## one for each required service, listed below:                                ##
 ##                                                                             ##
-##    port 24601 - login requests (At last, Valjean, we see each other plain!) ##
+##    port 24601 - receive training file (At last, Valjean, we see each other plain!) ##
 ##    port 24602 - message update requests                                     ##
-##    port 42069 - requests to send a file (listen 4 dank memes)               ##
+##    port 42069 - send training file (pump out dank memes)               ##
 
 #def SQLinsert(jsonthing):
-#   conn = MySQLdb(host = "us", user = "", passwd = "", db = "")
-#   obj = conn.cursor()
-#   obj.execute("INSERT INTO db training VALUES (%s)", jsonthing)
-#   conn.close()
+#   conn = pymysql.connect(host = "us", user = "", password = "", db = "")
+#
+#   try:   
+#       with conn.cursor() as cur:
+#           cur.execute("INSERT INTO db training VALUES (%s)", jsonthing)
+#       conn.commit()
+#   finally:
+#       conn.close()
 
 def servRun():
     sendsock = S.socket(S.AF_INET, S.SOCK_STREAM)    # may use this for a service idk
