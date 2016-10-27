@@ -39,7 +39,7 @@ def servRun():
 
     host = S.gethostname()           # grab this machine's name
     servlogs.write(host)
-    grabsock.bind((host, 42069))     # bind host to socket to receive files from clients
+    grabsock.bind((host, 24601))     # bind host to socket to receive files from clients
 
     grabsock.listen(5)
     servlogs.write("##### START LISTENING #####")
