@@ -12,7 +12,7 @@
 import socket as S
 import os    # We need to make a directory to store user keys and files to be sent.
 from time import gmtime, strftime   # timestamping phone data files
-import pymysql.cursors
+#import pymysql.cursors
 
 
 ## My scheme for the server requires it to listen for requests on three ports, ##
@@ -32,7 +32,7 @@ import pymysql.cursors
 #   finally:
 #       conn.close()
 
-def servRun():
+def servRun(servlogs):
     sendsock = S.socket(S.AF_INET, S.SOCK_STREAM)    # may use this for a service idk
     updatesock = S.socket(S.AF_INET, S.SOCK_STREAM)    # listen for message update requests
     grabsock = S.socket(S.AF_INET, S.SOCK_STREAM)    # listen for new files to send
