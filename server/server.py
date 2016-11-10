@@ -13,14 +13,17 @@ import socket as S
 import os    # We need to make a directory to store user keys and files to be sent.
 from time import gmtime, strftime   # timestamping phone data files
 #import pymysql.cursors
+from http_parser.http import HttpStream
+from http_parser.reader import SocketReader
+from http_parser.util import b
 
-
-## My scheme for the server requires it to listen for requests on three ports, ##
-## one for each required service, listed below:                                ##
-##                                                                             ##
-##    port 24601 - receive training file (At last, Valjean, we see each other plain!) ##
-##    port 24602 - message update requests                                     ##
-##    port 42069 - send training file (pump out dank memes)               ##
+## My scheme for the server requires it to listen for requests    ##
+## on three ports, one for each required service, listed below:   ##
+##                                                                ##
+##    EDIT: Just listen for training data on port 80.             ##
+##    port 24601 - receive data file from client(At last,         ##
+##                 Valjean, we see each other plain!)             ##
+##    port 42069 - send training file (pump out dank memes)       ##
 
 #def SQLinsert(jsonthing):
 #   conn = pymysql.connect(host = "us", user = "", password = "", db = "")
@@ -39,7 +42,7 @@ def servRun(servlogs):
 
     host = S.gethostname()           # grab this machine's name
     servlogs.write(host)
-    grabsock.bind((host, 24601))     # bind host to socket to receive files from clients
+    grabsock.bind((host, 80))     # bind host to socket to receive files from clients
 
     grabsock.listen(5)
     servlogs.write("##### START LISTENING #####")
