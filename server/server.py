@@ -70,7 +70,6 @@ def gibeJSON():
     
     return "success"
     
-
 def servRun(servlogs):
     sendsock = S.socket(S.AF_INET, S.SOCK_STREAM)    # may use this for a service idk
     updatesock = S.socket(S.AF_INET, S.SOCK_STREAM)    # listen for message update requests
@@ -127,4 +126,4 @@ def start():
 
 
 if __name__ == '__main__':
-    app.run()
+    start()
