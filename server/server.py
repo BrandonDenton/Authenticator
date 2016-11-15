@@ -58,6 +58,7 @@ def SQLinsert(jsonthing):
     finally:
         conn.close()
 
+'''This function does JSON grabbing, SQL insertion, and MALLET operations.'''
 def gibeJSON():
     flat = flatten_json(request.json)
     SQLinsert(json_normalize(flat));    # MySQL
@@ -67,7 +68,17 @@ def gibeJSON():
     fname = timestamp + ".txt"
     with open(fname, "wb") as f:
         f.write(flat)
+    os.system("mv fname ~/Desktop/Authenticator/training-data")    # We don't want MALLET to train on our logfiles. :0
+
+    # Format the text file properly and build topic models.
+    os.system("bin/mallet import-dir --input ~/Desktop/Authenticator/training-data --output topic-input.mallet \
+  --keep-sequence --remove-stopwords")
+    os.system("bin/mallet train-topics --input topic-input.mallet \
+  --num-topics 100 --output-state topic-state.gz")
     
+    # cleanup
+    os.system("rm topic-input.mallet")
+
     return "success"
     
 def servRun(servlogs):
@@ -122,7 +133,7 @@ def start():
     servlogs = open(logfile, "wb")
     
     servRun(servlogs)
-    servlogs.close()    # kill log reading if something goes wrong
+    servlogs.close()    # kill log writing if something goes wrong
 
 
 if __name__ == '__main__':
