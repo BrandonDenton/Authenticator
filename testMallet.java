@@ -1,4 +1,4 @@
-package cc.mallet.examples;
+package edu.umass.cs.iesl.mimno;
 
 import cc.mallet.util.*;
 import cc.mallet.types.*;
