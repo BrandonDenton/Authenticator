@@ -71,14 +71,15 @@ def gibeJSON():
     os.system("mv fname ~/Desktop/Authenticator/training-data")    # We don't want MALLET to train on our logfiles. :0
 
     # Format the text file properly and build topic models.
+    os.system("cd ~/Desktop/Mallet")
     os.system("bin/mallet import-dir --input ~/Desktop/Authenticator/training-data --output topic-input.mallet \
   --keep-sequence --remove-stopwords")
     os.system("bin/mallet train-topics --input topic-input.mallet \
-  --num-topics 100 --output-state topic-state.gz")
+  --num-topics 100 --output-state topic-state.txt")    # text file for client to compare
     
     # cleanup
     os.system("rm topic-input.mallet")
-
+    os.system("cd ~/Desktop/Authenticator/server
     return "success"
     
 def servRun(servlogs):
