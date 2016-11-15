@@ -79,7 +79,7 @@ def gibeJSON():
     
     # cleanup
     os.system("rm topic-input.mallet")
-    os.system("cd ~/Desktop/Authenticator/server
+    os.system("cd ~/Desktop/Authenticator/server")
     return "success"
     
 def servRun(servlogs):
