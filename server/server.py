@@ -15,6 +15,7 @@ from time import gmtime, strftime   # timestamping phone data files
 import MySQLdb
 from flask import Flask, request
 import json
+import AuthHelper
 
 ## My scheme for the server requires it to listen for requests    ##
 ## on three ports, one for each required service, listed below:   ##
@@ -57,38 +58,6 @@ def gibeJSON():
     os.system("rm topic-input.mallet")
 
     return "success"
-
-def flatten_json(y):
-    out = {}
-
-    def flatten(x, name=''):
-        if type(x) is dict:
-            for a in x:
-                flatten(x[a], name + a + '_')
-        elif type(x) is list:
-            i = 0
-            for a in x:
-                flatten(a, name + str(i) + '_')
-                i += 1
-        else:
-            out[name[:-1]] = x
-
-    flatten(y)
-    return out
-
-def SQLinsert(jsonthing):
-    print("Connecting to database....")
-    with open("dbcreds.conf") as conff:
-        conflist = conff.read().splitlines()
-
-    db = MySQLdb.connect(host = conflist[0], user = conflist[2], passwd = conflist[3], db = conflist[1])
-
-    try:   
-        with conn.cursor() as cur:
-            cur.execute("INSERT INTO db training VALUES (%s)", jsonthing)
-        conn.commit()
-    finally:
-        conn.close()
 
 
 if __name__ == '__main__':
