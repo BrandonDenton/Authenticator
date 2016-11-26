@@ -1,4 +1,6 @@
-
+#!usr/bin/env python
+import MySQLdb
+import json
 
 def flatten_json(y):
     out = {}
